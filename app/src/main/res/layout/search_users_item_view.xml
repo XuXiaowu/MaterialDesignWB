@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/root_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/user_name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_padding"
+        android:layout_marginRight="@dimen/medium_padding"
+        android:layout_marginTop="@dimen/small_padding"
+        android:text="用户么么么么"/>
+
+    <TextView
+        android:id="@+id/followers_count_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/user_name_view"
+        android:layout_marginLeft="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/small_padding"
+        android:text="粉丝：88"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_list_line_height"
+        android:layout_below="@+id/user_name_view"
+        android:layout_marginTop="@dimen/small_padding"
+        android:background="@android:color/darker_gray"/>
+
+</RelativeLayout>

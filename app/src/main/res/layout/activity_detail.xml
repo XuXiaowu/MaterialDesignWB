@@ -1,0 +1,292 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android" >-->
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+
+            android:visibility="visible"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <!--  app:layout_scrollFlags="scroll|enterAlways"-->
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/detail_swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?attr/actionBarSize">
+            <!-- app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
+            <truecolor.mdwb.view.MyNestedScrollView
+                android:id="@+id/detail_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical">
+
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_margin">
+
+                    <TextView
+                        android:id="@+id/pin_goog_num_tv_ts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_alignParentRight="true"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/even_big_padding"
+                        android:paddingRight="@dimen/even_big_padding"
+                        android:text="@string/detaile_weibo_likes"
+                        android:textColor="@drawable/detail_function_text_color_selector"
+                        android:visibility="gone" />
+
+                    <truecolor.mdwb.view.CircleImageView
+                        android:id="@+id/head_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/pin_goog_num_tv_ts"
+                        android:src="@mipmap/ic_user"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/user_name_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/head_view"
+                        android:layout_marginLeft="@dimen/normal_margin"
+                        android:layout_toRightOf="@+id/head_view"
+                        android:text="用户名用户名用户名用户名"
+                        android:textSize="@dimen/medium_test_size" />
+
+                    <TextView
+                        android:id="@+id/user_sub_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/user_name_view"
+                        android:layout_below="@+id/user_name_view"
+                        android:layout_marginTop="1dp"
+                        android:layout_toRightOf="@+id/head_view"
+                        android:text="sub title sub title sub title"
+                        android:textSize="@dimen/small_test_size" />
+
+                    <TextView
+                        android:id="@+id/weibo_content_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/head_view"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:bufferType="editable"
+                        android:editable="true"
+                        android:autoLink="all"
+                        android:text="内容内容内容内容内容内容"
+                        android:textSize="@dimen/medium_test_size" />
+
+                    <truecolor.mdwb.view.ImageGroupView
+                        android:id="@+id/image_gropu_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/weibo_content_view"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:visibility="gone" />
+
+
+                    <View
+                        android:id="@+id/cut_off_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/image_gropu_view"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:background="@color/dim_foreground_holo_dark" />
+
+                    <LinearLayout
+                        android:id="@+id/repost_container_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cut_off_line"
+                        android:orientation="vertical">
+                        <!-- android:background="?android:attr/selectableItemBackground"-->
+
+                        <TextView
+                            android:id="@+id/weibo_repost_content_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cut_off_line"
+                            android:layout_marginTop="@dimen/normal_margin"
+                            android:background="?attr/selectableItemBackground"
+                            android:editable="true"
+                            android:text=""
+                            android:textSize="@dimen/medium_test_size" />
+
+                        <truecolor.mdwb.view.ImageGroupView
+                            android:id="@+id/repost_image_gropu_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/weibo_repost_content_view"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/goog_num_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/repost_container_view"
+                        android:layout_gravity="center_vertical"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/even_big_padding"
+                        android:paddingRight="@dimen/even_big_padding"
+                        android:text="@string/detaile_weibo_likes"
+                        android:textColor="@drawable/detail_function_text_color_selector" />
+
+                    <TextView
+                        android:id="@+id/comment_num_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_below="@+id/repost_container_view"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@+id/goog_num_tv"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/even_big_padding"
+                        android:paddingRight="@dimen/even_big_padding"
+                        android:text="@string/detaile_weibo_comment"
+                        android:textColor="@drawable/detail_function_text_color_selector" />
+
+                    <TextView
+                        android:id="@+id/repost_num_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_below="@+id/repost_container_view"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@+id/comment_num_tv"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/even_big_padding"
+                        android:paddingRight="@dimen/even_big_padding"
+                        android:text="@string/detaile_weibo_repost"
+                        android:textColor="@drawable/detail_function_text_color_selector" />
+
+                    <LinearLayout
+                        android:id="@+id/comment_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/goog_num_tv"
+                        android:orientation="vertical"
+                        android:paddingBottom="9dp">
+                        <!-- android:background="#ffffff"-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/repost_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/goog_num_tv"
+                        android:orientation="vertical"
+                        android:paddingBottom="20dp"
+                        android:visibility="gone">
+                        <!-- android:background="#ffffff"-->
+                    </LinearLayout>
+
+
+                </android.support.percent.PercentRelativeLayout>
+
+            </truecolor.mdwb.view.MyNestedScrollView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <RelativeLayout
+            android:id="@+id/pin_function_view"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:background="@color/color_white"
+            android:paddingRight="@dimen/medium_margin"
+            android:visibility="invisible">
+            <!-- android:background="@color/color_white" -->
+
+            <TextView
+                android:id="@+id/pin_comment_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/pin_goog_num_tv"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingLeft="@dimen/even_big_padding"
+                android:paddingRight="@dimen/even_big_padding"
+                android:text="@string/detaile_weibo_comment"
+                android:textColor="@drawable/detail_function_text_color_selector" />
+
+
+            <TextView
+                android:id="@+id/pin_repost_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/pin_comment_num_tv"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingLeft="@dimen/even_big_padding"
+                android:paddingRight="@dimen/even_big_padding"
+                android:text="@string/detaile_weibo_repost"
+                android:textColor="@drawable/detail_function_text_color_selector" />
+
+            <TextView
+                android:id="@+id/pin_goog_num_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:paddingLeft="@dimen/even_big_padding"
+                android:paddingRight="@dimen/even_big_padding"
+                android:text="@string/detaile_weibo_likes"
+                android:textColor="@drawable/detail_function_text_color_selector"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/function_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@mipmap/ic_comment"
+        app:elevation="10dp"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:pressedTranslationZ="20dp" />
+
+
+    <!--</LinearLayout>-->
+
+</android.support.design.widget.CoordinatorLayout>

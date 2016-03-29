@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MaterialDesignWB.iml" filepath="$PROJECT_DIR$/MaterialDesignWB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imageloader/imageloader.iml" filepath="$PROJECT_DIR$/imageloader/imageloader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recyclerviewheader/recyclerviewheader.iml" filepath="$PROJECT_DIR$/recyclerviewheader/recyclerviewheader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webdataloader/webdataloader.iml" filepath="$PROJECT_DIR$/webdataloader/webdataloader.iml" />
+    </modules>
+  </component>
+</project>

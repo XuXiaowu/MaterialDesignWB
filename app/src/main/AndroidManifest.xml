@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="truecolor.mdwb" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:name=".apps.MaterialDesignWBApps"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <service android:name=".logics.publish.UploadService" />
+
+        <activity
+            android:name=".apps.Oauth2AccessTokenActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".apps.MainActivity"
+            android:label="@string/title_activity_oauth2_access_token" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".apps.DetailActivity"
+            android:label="@string/title_activity_detail" >
+        </activity>
+        <activity
+            android:name=".apps.PublishActivity"
+            android:label="@string/title_activity_publish_statues"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+        <activity
+            android:name=".apps.PhotoBrowseActivity"
+            android:label="@string/title_activity_photo_browse" >
+        </activity>
+        <activity
+            android:name=".apps.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name=".apps.FriendsActivity"
+            android:label="@string/title_activity_friends" >
+        </activity>
+    </application>
+
+</manifest>

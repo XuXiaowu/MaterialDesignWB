@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:drawable="@color/holo_light_primary" android:state_selected="true" >-->
+        <!--<corners android:radius="3dp" />-->
+    <!--</item>-->
+
+    <!--<item android:drawable="@color/holo_light_primary" android:state_pressed="true" >-->
+        <!--<corners android:radius="3dp" />-->
+    <!--</item>-->
+
+    <!--<item android:drawable="@android:color/holo_blue_light" >-->
+        <!--<corners android:radius="3dp" />-->
+    <!--</item>-->
+
+    <item android:state_selected="true">
+        <shape>
+            <solid android:color="@color/dim_foreground_holo_dark" />
+            <corners android:bottomLeftRadius="3dp" android:bottomRightRadius="3dp"
+                android:topLeftRadius="3dp" android:topRightRadius="3dp"/>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/dim_foreground_holo_dark" />
+            <corners android:bottomLeftRadius="3dp" android:bottomRightRadius="3dp"
+                android:topLeftRadius="3dp" android:topRightRadius="3dp"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <solid android:color="@android:color/white" />
+            <corners android:bottomLeftRadius="3dp" android:bottomRightRadius="3dp"
+                android:topLeftRadius="3dp" android:topRightRadius="3dp"/>
+        </shape>
+
+    </item>
+</selector>

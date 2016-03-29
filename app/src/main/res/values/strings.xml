@@ -1,0 +1,138 @@
+<resources>
+    <string name="app_name">卡片微博</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_title_home">首页</string>
+    <string name="menu_title_message">消息</string>
+    <string name="menu_title_find">发现</string>
+    <string name="menu_title_more">更多</string>
+    <string name="menu_title_info">关于</string>
+    <string name="empty_data">没有数据</string>
+
+    <string name="time_form">%s  来自</string>
+    <string name="form_web">网页版</string>
+    <string name="form_phone_web">手机网页版</string>
+    <string name="form_android">Android客户端</string>
+    <string name="form_iphone">Iphone客户端</string>
+    <string name="form_ipad">Ipad客户端</string>
+    <string name="title_activity_oauth2_access_token">Oauth2AccessTokenActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <!-- detail -->
+    <string name="weibo_content">微博正文</string>
+    <string name="detaile_weibo_comment">评论 %d</string>
+    <string name="detaile_weibo_likes">赞 %d</string>
+    <string name="detaile_weibo_repost">转发 %d</string>
+    <string name="detaile_comment_repost">转发</string>
+    <string name="detaile_comment_comment">评论</string>
+    <string name="detaile_see_this_status">查看该微博</string>
+    <string name="copy">复制</string>
+    <string name="delete">删除</string>
+    <string name="delete_comment_fail">删除评论失败</string>
+    <string name="delete_repost_fail">删除转发失败</string>
+    <string name="delete_comment_copy">已复制到剪贴板</string>
+    <string name="s">已复制到剪贴板</string>
+
+    <!-- statuses-->
+    <string name="favorites">收藏</string>
+    <string name="cancel_favorites">取消收藏</string>
+    <string name="delete_favorites">删除收藏</string>
+    <string name="favorites_create_success">已收藏</string>
+    <string name="favorites_create_fail">收藏失败</string>
+    <string name="have_collected">已经收藏过了</string>
+    <string name="no_collected">还没有收藏该微博</string>
+    <string name="favorites_destroy_success">已取消收藏</string>
+    <string name="favorites_destroy_fail">取消收藏失败</string>
+    <string name="statuses_destroy_fail">删除微博失败</string>
+    <string name="search_user">搜用户</string>
+    <string name="search_statuses">搜微博</string>
+
+    <!-- pic_browse-->
+    <string name="copy_url">复制链接</string>
+    <string name="save">保存</string>
+    <string name="pic_save_success">图片已保存至:</string>
+    <string name="pic_save_fail">图片保存失败</string>
+    <string name="copy_url_success">图片链接已复制</string>
+
+
+    <string-array name="comment_menus">
+        <item>@string/detaile_comment_comment</item>
+        <item>@string/detaile_comment_repost</item>
+        <item>@string/delete</item>
+        <item>@string/copy</item>
+    </string-array>
+
+    <string-array name="repost_menus">
+        <item>@string/detaile_see_this_status</item>
+        <item>@string/detaile_comment_comment</item>
+        <item>@string/detaile_comment_repost</item>
+        <item>@string/delete</item>
+        <item>@string/copy</item>
+    </string-array>
+
+    <string-array name="status_card_more_menus">
+        <item>@string/favorites</item>
+        <item>@string/cancel_favorites</item>
+        <item>@string/delete</item>
+        <item>@string/copy</item>
+    </string-array>
+
+    <string-array name="detail_more_menus">
+        <item>@string/cancel_favorites</item>
+        <item>@string/copy</item>
+    </string-array>
+
+    <string-array name="favorites_more_menus">
+        <item>@string/delete_favorites</item>
+        <item>@string/copy</item>
+    </string-array>
+
+    <!-- publish -->
+    <string name="publish_new_status">新微博</string>
+    <string name="publish_status_comment">评论微博</string>
+    <string name="publish_status_repost">转发微博</string>
+    <string name="publish_status_comment_reply">回复评论</string>
+    <string name="publish_status_comment_hint">写下你的评论吧</string>
+    <string name="publish_status_repost_hint">说点什么......</string>
+    <string name="publish_new_status_hint">写点什么......</string>
+    <string name="publish_new_status_success">微博发送成功</string>
+    <string name="publish_new_status_fail">微博发送失败</string>
+    <string name="publish_comment_success">发布评论成功</string>
+    <string name="publish_comment_fail">发布评论失败</string>
+    <string name="publish_repost_success">转发微博成功</string>
+    <string name="publish_repost_fail">转发微博失败</string>
+    <string name="publish_go_to_see">去看看</string>
+    <string name="publish_content_no_empty">内容不能为空</string>
+    <string name="publish_pictures">相册</string>
+    <string name="publish_camera">拍照</string>
+    <string name="publish_select_photo_sources">选择图片来源</string>
+    <string name="publish_status_commtnt_uploading">评论发送中......</string>
+
+    <string name="loading_data">数据加载中...</string>
+    <string name="loading_erroe">数据加载失败，点击重试</string>
+    <string name="title_activity_publish_statues">PublishStatuesActivity</string>
+    <string name="title_activity_photo_browse">PhotoBrowseActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
+
+    <!-- search -->
+    <string name="sreach">搜索</string>
+    <string name="sreach_name_hint">昵称</string>
+    <string name="sreach_usert">搜用户</string>
+    <string name="sreach_statuses">搜微博</string>
+    <string name="sreach_key_not_empty">搜索关键字不能为空</string>
+    <string name="sreach_user_hint">联想搜索的数据范围是：v用户、粉丝500以上的达人、粉丝600以上的普通用户</string>
+    <string name="sreach_status_hint">微博关键字</string>
+    <string name="sreach_user_followers_count">粉丝:%s</string>
+    <string name="title_activity_friends">FriendsActivity</string>
+
+    <!-- friends -->
+    <string name="title_friends">好友</string>
+
+    <!-- info -->
+    <string name="info_version_information">版本信息</string>
+    <string name="info_version_number">V%s</string>
+    <string name="info_email">开发者邮箱：</string>
+    <string name="info_email_address">15271367578@163.com</string>
+
+</resources>
