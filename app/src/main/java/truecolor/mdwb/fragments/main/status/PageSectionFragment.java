@@ -3,7 +3,6 @@ package truecolor.mdwb.fragments.main.status;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +22,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -385,13 +384,13 @@ public class PageSectionFragment extends Fragment{
             itmeList.add(items[3]);
         }
 
-        new AlertDialogWrapper.Builder(getActivity())
-                .setItems(itmeList.toArray(new String[itmeList.size()]), new DialogInterface.OnClickListener() {
-
+        new MaterialDialog.Builder(getContext())
+                .items(R.array.status_card_more_menus)
+                .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                         StatusesAPI statusesAPI;
-                        switch (which){
+                        switch (position){
                             case 0:
                                 statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
                                 statusesAPI.favoritesCreate(ftl.idstr, mFavoritesCreateRequestListener);
@@ -417,9 +416,43 @@ public class PageSectionFragment extends Fragment{
                                 break;
                         }
                     }
+                }).show();
 
-                })
-                .show();
+//        new AlertDialogWrapper.Builder(getActivity())
+//                .setItems(itmeList.toArray(new String[itmeList.size()]), new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        StatusesAPI statusesAPI;
+//                        switch (which){
+//                            case 0:
+//                                statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                statusesAPI.favoritesCreate(ftl.idstr, mFavoritesCreateRequestListener);
+//                                break;
+//                            case 1:
+//                                statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                statusesAPI.favoritesDestroy(ftl.idstr, mFavoritesDestroyRequestListener);
+//                                break;
+//                            case 2:
+//                                if (isCurrentUser){
+//                                    statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                    statusesAPI.destroy(Long.parseLong(ftl.idstr), mStatusesDestroyRequestListener);
+//                                }else {
+//                                    Utils.copy(ftl.text, getActivity());
+//                                    Snackbar.make(mRecyclerView, getResources().getString(R.string.delete_comment_copy),
+//                                            Snackbar.LENGTH_LONG).show();
+//                                }
+//                                break;
+//                            case 3:
+//                                Utils.copy(ftl.text, getActivity());
+//                                Snackbar.make(mRecyclerView, getResources().getString(R.string.delete_comment_copy),
+//                                        Snackbar.LENGTH_LONG).show();
+//                                break;
+//                        }
+//                    }
+//
+//                })
+//                .show();
     }
 
    private void bindFriendsTimelineData(Bundle params, Object result){

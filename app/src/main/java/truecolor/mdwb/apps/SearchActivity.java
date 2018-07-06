@@ -1,14 +1,13 @@
 package truecolor.mdwb.apps;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.weibo.sdk.android.Oauth2AccessToken;
@@ -50,7 +49,7 @@ import truecolor.mdwb.model.FriendsTimelineResult;
 import truecolor.mdwb.model.UsersResult;
 import truecolor.mdwb.utils.Utils;
 
-public class SearchActivity extends ActionBarActivity {
+public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView mListView;
     private EditText mEditView;
@@ -484,7 +483,7 @@ public class SearchActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        actionBar.setHomeAsUpIndicator(R.drawable.back_white);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mListView = (RecyclerView) findViewById(R.id.list_view);
@@ -555,13 +554,13 @@ public class SearchActivity extends ActionBarActivity {
             itmeList.add(items[3]);
         }
 
-        new AlertDialogWrapper.Builder(this)
-                .setItems(itmeList.toArray(new String[itmeList.size()]), new DialogInterface.OnClickListener() {
-
+        new MaterialDialog.Builder(this)
+                .items(R.array.status_card_more_menus)
+                .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                         StatusesAPI statusesAPI;
-                        switch (which) {
+                        switch (position) {
                             case 0:
                                 statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
                                 statusesAPI.favoritesCreate(ftl.idstr, mFavoritesCreateRequestListener);
@@ -587,8 +586,41 @@ public class SearchActivity extends ActionBarActivity {
                                 break;
                         }
                     }
-
                 })
+
+//                .setItems(itmeList.toArray(new String[itmeList.size()]), new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        StatusesAPI statusesAPI;
+//                        switch (which) {
+//                            case 0:
+//                                statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                statusesAPI.favoritesCreate(ftl.idstr, mFavoritesCreateRequestListener);
+//                                break;
+//                            case 1:
+//                                statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                statusesAPI.favoritesDestroy(ftl.idstr, mFavoritesDestroyRequestListener);
+//                                break;
+//                            case 2:
+//                                if (isCurrentUser) {
+//                                    statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                    statusesAPI.destroy(Long.parseLong(ftl.idstr), mStatusesDestroyRequestListener);
+//                                } else {
+//                                    Utils.copy(ftl.text, SearchActivity.this);
+//                                    Snackbar.make(mListView, getResources().getString(R.string.delete_comment_copy),
+//                                            Snackbar.LENGTH_LONG).show();
+//                                }
+//                                break;
+//                            case 3:
+//                                Utils.copy(ftl.text, SearchActivity.this);
+//                                Snackbar.make(mListView, getResources().getString(R.string.delete_comment_copy),
+//                                        Snackbar.LENGTH_LONG).show();
+//                                break;
+//                        }
+//                    }
+//
+//                })
                 .show();
     }
 

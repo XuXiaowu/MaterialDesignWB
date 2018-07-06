@@ -23,7 +23,7 @@
             android:layout_width="?attr/actionBarSize"
             android:layout_height="@dimen/action_bar_height"
             android:scaleType="center"
-            android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+
             android:background="?attr/selectableItemBackground"/>
 
         <TextView

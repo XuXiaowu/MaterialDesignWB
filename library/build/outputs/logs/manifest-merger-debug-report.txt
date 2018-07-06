@@ -1,0 +1,43 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:1-9:12
+	package
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:3:5-36
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:5:5-41
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:4:5-30
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+application
+ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:7:5-82
+	android:hardwareAccelerated
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:7:18-52
+	android:allowBackup
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml:7:53-79
+uses-sdk
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		ADDED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml
+		INJECTED from /Users/xuxiaowu/AndroidStudioProjects/GithubProject/MaterialDesignWB/library/src/main/AndroidManifest.xml

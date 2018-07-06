@@ -3,8 +3,8 @@ package truecolor.mdwb.apps;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
@@ -12,15 +12,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Html;
-import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -48,7 +45,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import truecolor.mdwb.R;
@@ -70,7 +66,7 @@ import truecolor.mdwb.view.ImageGroupView;
 import truecolor.mdwb.view.MyNestedScrollView;
 import truecolor.webdataloader.WebListener;
 
-public class DetailActivity extends ActionBarActivity {
+public class DetailActivity extends AppCompatActivity {
 
     public static FriendsTimelineResult.FriendsTimeline mFriendsTimeline = null;
     public static FriendsTimelineResult.FriendsTimeline mRepostFriendsTimeline = null;
@@ -97,7 +93,7 @@ public class DetailActivity extends ActionBarActivity {
     private View mCutOffLineView;
     private ImageGroupView mRepostImageGroupView;
     private LinearLayout mRepostContainerView;
-//    private LinearLayout mFunctionView;
+    //    private LinearLayout mFunctionView;
     private LinearLayout mCommentListView;
     private LinearLayout mRepostListView;
     private MyNestedScrollView mScrollView;
@@ -122,7 +118,7 @@ public class DetailActivity extends ActionBarActivity {
     private int mInitialOffset;
     private boolean mHidden;
     private int mStatusBarHeight;
-//    private int mCommentNumViewLocaltionOfY;
+    //    private int mCommentNumViewLocaltionOfY;
     private int mPinFunctionViewLocationOnY;
 
     private boolean mLockGetMoreComment;
@@ -132,7 +128,7 @@ public class DetailActivity extends ActionBarActivity {
 
     private int mDeletedPos;
     private ProgressDialog mProgressDialog;
-//
+    //
     private static final int REPOST_DELETE_SUCCESS = 10001;
     private static final int REPOST_DELETE_FAIL = 10002;
     private static final int COMMENT_DELETE_SUCCESS = 10003;
@@ -150,7 +146,7 @@ public class DetailActivity extends ActionBarActivity {
         setSupportActionBar(mToobar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+//        actionBar.setHomeAsUpIndicator(R.drawable.ic_back_white);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getResources().getString(R.string.weibo_content));
 
@@ -183,16 +179,16 @@ public class DetailActivity extends ActionBarActivity {
             StatusesAPI statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
             statusesAPI.favoritesDestroy(mFriendsTimeline.idstr, mFavoritesDestroyRequestListener);
             return true;
-        } else if (id == R.id.action_copy){
+        } else if (id == R.id.action_copy) {
             Utils.copy(mFriendsTimeline.text, DetailActivity.this);
             Snackbar.make(mUserNameView, getResources().getString(R.string.delete_comment_copy),
                     Snackbar.LENGTH_LONG).show();
             return true;
-        }else if (id == R.id.action_favorite){
+        } else if (id == R.id.action_favorite) {
             StatusesAPI statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
             statusesAPI.favoritesCreate(mFriendsTimeline.idstr, mFavoritesCreateRequestListener);
             return true;
-        }else if (id == R.id.action_repost){
+        } else if (id == R.id.action_repost) {
             String commentEdit = "//@" + mFriendsTimeline.user.screen_name + ":" + mFriendsTimeline.text;
             Intent intent = new Intent();
             intent.setType(Constant.PUBLISH_STATUESE_REPOST);
@@ -201,7 +197,7 @@ public class DetailActivity extends ActionBarActivity {
             intent.setClass(DetailActivity.this, PublishActivity.class);
             startActivity(intent);
             return true;
-        }else if(id == android.R.id.home){
+        } else if (id == android.R.id.home) {
             finish();
             return true;
         }
@@ -219,7 +215,7 @@ public class DetailActivity extends ActionBarActivity {
         mRepostNunView = (TextView) findViewById(R.id.repost_num_tv);
         mCommentNumView = (TextView) findViewById(R.id.comment_num_tv);
         mPinGoodNumView = (TextView) findViewById(R.id.pin_goog_num_tv);
-        mPinRepostNunView= (TextView) findViewById(R.id.pin_repost_num_tv);
+        mPinRepostNunView = (TextView) findViewById(R.id.pin_repost_num_tv);
         mPinCommentNumView = (TextView) findViewById(R.id.pin_comment_num_tv);
         mPinFunctionView = (RelativeLayout) findViewById(R.id.pin_function_view);
         mGoodView = (LinearLayout) findViewById(R.id.good_view);
@@ -367,7 +363,7 @@ public class DetailActivity extends ActionBarActivity {
                     if (result != null) {
                         CommentsResult comments = (CommentsResult) result;
                         List commentResultList = Arrays.asList(comments.comments);
-                        mCommentDatas.addAll(0 ,commentResultList);
+                        mCommentDatas.addAll(0, commentResultList);
                         if (commentResultList.size() > 0) {
                             addCommentItemView(commentResultList, true);
                             mCommentSinceId = Long.valueOf(comments.comments[0].id);
@@ -457,7 +453,7 @@ public class DetailActivity extends ActionBarActivity {
 
                 selectedRepostView();
                 showRepostListView();
-                if (mRepostListView.getChildCount() == 0){
+                if (mRepostListView.getChildCount() == 0) {
                     mRepostListView.addView(mRepostListLoadingView);
                     getRepost(false, false);
                 }
@@ -537,20 +533,20 @@ public class DetailActivity extends ActionBarActivity {
                 commentMenuArrList.add(commentMenuArr[1]);
                 commentMenuArrList.add(commentMenuArr[2]);
                 commentMenuArrList.add(commentMenuArr[3]);
-            }else {
+            } else {
                 commentMenuArrList.add(commentMenuArr[0]);
                 commentMenuArrList.add(commentMenuArr[1]);
                 commentMenuArrList.add(commentMenuArr[3]);
             }
 
-            new AlertDialogWrapper.Builder(DetailActivity.this)
-                    .setTitle(comment.user.screen_name)
-                    .setItems(commentMenuArrList.toArray(new String[commentMenuArrList.size()]), new DialogInterface.OnClickListener() {
-
+            new MaterialDialog.Builder(DetailActivity.this)
+                    .title(comment.user.screen_name)
+                    .items(commentMenuArrList.toArray(new String[commentMenuArrList.size()]))
+                    .itemsCallback(new MaterialDialog.ListCallback() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                             Intent intent;
-                            switch (which) {
+                            switch (position) {
                                 case 0:
                                     intent = new Intent();
                                     intent.setType(Constant.PUBLISH_COMMENTS_REPLY);
@@ -585,9 +581,53 @@ public class DetailActivity extends ActionBarActivity {
                                     break;
                             }
                         }
+                    }).show();
 
-                    })
-                    .show();
+//            new AlertDialogWrapper.Builder(DetailActivity.this)
+//                    .setTitle(comment.user.screen_name)
+//                    .setItems(commentMenuArrList.toArray(new String[commentMenuArrList.size()]), new DialogInterface.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent intent;
+//                            switch (which) {
+//                                case 0:
+//                                    intent = new Intent();
+//                                    intent.setType(Constant.PUBLISH_COMMENTS_REPLY);
+//                                    intent.putExtra(Constant.EXTRA_STATUESE_ID, mFriendsTimeline.idstr);
+//                                    intent.putExtra(Constant.EXTRA_COMMENT_ID, comment.id);
+//                                    intent.setClass(DetailActivity.this, PublishActivity.class);
+//                                    startActivity(intent);
+//                                    break;
+//                                case 1:
+//                                    intent = new Intent();
+//                                    String commentEdit = "//@" + comment.user.screen_name + ":" + comment.text;
+//                                    intent.setType(Constant.PUBLISH_COMMENTS_REPOST);
+//                                    intent.putExtra(Constant.EXTRA_STATUESE_ID, mFriendsTimeline.idstr);
+//                                    intent.putExtra(Constant.EXTRA_COMMENT, commentEdit);
+//                                    intent.setClass(DetailActivity.this, PublishActivity.class);
+//                                    startActivity(intent);
+//                                    break;
+//                                case 2:
+//                                    if (isCurrentUser) {
+//                                        mProgressDialog.show();
+//                                        mDeletedPos = mCommentDatas.indexOf(comment);
+//                                        StatusesAPI statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                        statusesAPI.commentsDestroy(comment.id, mCommentsDestroyRequestListener);
+//                                    } else {
+//                                        Utils.copy(comment.text, DetailActivity.this);
+//                                        Toast.makeText(DetailActivity.this, R.string.delete_comment_copy, Toast.LENGTH_SHORT).show();
+//                                    }
+//                                    break;
+//                                case 3:
+//                                    Utils.copy(comment.text, DetailActivity.this);
+//                                    Toast.makeText(DetailActivity.this, R.string.delete_comment_copy, Toast.LENGTH_SHORT).show();
+//                                    break;
+//                            }
+//                        }
+//
+//                    })
+//                    .show();
         }
     };
 
@@ -607,20 +647,20 @@ public class DetailActivity extends ActionBarActivity {
                 commentMenuArrList.add(commentMenuArr[2]);
                 commentMenuArrList.add(commentMenuArr[3]);
                 commentMenuArrList.add(commentMenuArr[4]);
-            }else {
+            } else {
                 commentMenuArrList.add(commentMenuArr[0]);
                 commentMenuArrList.add(commentMenuArr[1]);
                 commentMenuArrList.add(commentMenuArr[2]);
                 commentMenuArrList.add(commentMenuArr[4]);
             }
 
-            new AlertDialogWrapper.Builder(DetailActivity.this)
-                    .setItems(commentMenuArrList.toArray(new String[commentMenuArrList.size()]), new DialogInterface.OnClickListener() {
-
+            new MaterialDialog.Builder(DetailActivity.this)
+                    .items(commentMenuArr)
+                    .itemsCallback(new MaterialDialog.ListCallback() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                             Intent intent;
-                            switch (which) {
+                            switch (position) {
                                 case 0:
                                     intent = new Intent();
                                     intent.putExtra(Constant.DETALI_FRIENDS_TIMELINE_TYPE, Constant.DETAIL_FRIENDS_TIMELINE_TYPE_DETAIL_REPOST);
@@ -661,9 +701,58 @@ public class DetailActivity extends ActionBarActivity {
                                     break;
                             }
                         }
+                    }).show();
 
-                    })
-                    .show();
+//            new AlertDialogWrapper.Builder(DetailActivity.this)
+//                    .setItems(commentMenuArrList.toArray(new String[commentMenuArrList.size()]), new DialogInterface.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent intent;
+//                            switch (which) {
+//                                case 0:
+//                                    intent = new Intent();
+//                                    intent.putExtra(Constant.DETALI_FRIENDS_TIMELINE_TYPE, Constant.DETAIL_FRIENDS_TIMELINE_TYPE_DETAIL_REPOST);
+//                                    MaterialDesignWBApps.EXTRA_STATUS = status;
+//                                    intent.setClass(DetailActivity.this, DetailActivity.class);
+//                                    startActivity(intent);
+//                                    break;
+//                                case 1:
+//                                    intent = new Intent();
+//                                    intent.setType(Constant.PUBLISH_COMMENTS_CREATE);
+//                                    intent.putExtra(Constant.EXTRA_STATUESE_ID, status.idstr);
+//                                    intent.setClass(DetailActivity.this, PublishActivity.class);
+//                                    startActivity(intent);
+//                                    break;
+//                                case 2:
+//                                    intent = new Intent();
+//                                    String commentEdit = "//@" + status.user.screen_name + ":" + status.text;
+//                                    intent.setType(Constant.PUBLISH_STATUESE_REPOST);
+//                                    intent.putExtra(Constant.EXTRA_STATUESE_ID, status.idstr);
+//                                    intent.putExtra(Constant.EXTRA_COMMENT, commentEdit);
+//                                    intent.setClass(DetailActivity.this, PublishActivity.class);
+//                                    startActivity(intent);
+//                                    break;
+//                                case 3:
+//                                    if (isCurrentUser) {
+//                                        mProgressDialog.show();
+//                                        mDeletedPos = mRepostDatas.indexOf(status);
+//                                        StatusesAPI statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                        statusesAPI.destroy(Long.parseLong(status.idstr), mStatusesDestroyRequestListener);
+//                                    } else {
+//                                        Utils.copy(status.text, DetailActivity.this);
+//                                        Toast.makeText(DetailActivity.this, R.string.delete_comment_copy, Toast.LENGTH_SHORT).show();
+//                                    }
+//                                    break;
+//                                case 4:
+//                                    Utils.copy(status.text, DetailActivity.this);
+//                                    Toast.makeText(DetailActivity.this, R.string.delete_comment_copy, Toast.LENGTH_SHORT).show();
+//                                    break;
+//                            }
+//                        }
+//
+//                    })
+//                    .show();
         }
     };
 
@@ -749,9 +838,9 @@ public class DetailActivity extends ActionBarActivity {
                 mPinFunctionViewLocationOnY = commentlocationOnScreenXY[1];
             }
 
-            if (mCommentNumViewScrollLoactionOnY < mPinFunctionViewLocationOnY){
+            if (mCommentNumViewScrollLoactionOnY < mPinFunctionViewLocationOnY) {
                 mPinFunctionView.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mPinFunctionView.setVisibility(View.GONE);
             }
         }
@@ -818,9 +907,9 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public void onError(WeiboException e) {
             DetailMessage detailMessage = JSON.parseObject(e.getMessage(), DetailMessage.class);
-            if (detailMessage.error_code.equals("20704")){
+            if (detailMessage.error_code.equals("20704")) {
                 mHandler.sendEmptyMessage(Constant.FAVORITES_CREATE_FAIL_HAVA_COLLECTED);
-            }else {
+            } else {
                 mHandler.sendEmptyMessage(Constant.FAVORITES_CREATE_FAIL);
             }
         }
@@ -849,11 +938,11 @@ public class DetailActivity extends ActionBarActivity {
 
     };
 
-    private Handler mHandler = new Handler(){
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case COMMENT_DELETE_SUCCESS:
                     mCommentDatas.remove(mDeletedPos);
                     mCommentListView.removeViewAt(mDeletedPos);
@@ -861,7 +950,7 @@ public class DetailActivity extends ActionBarActivity {
                     break;
                 case COMMENT_DELETE_FAIL:
                     Snackbar.make(mUserNameView, getResources().getString(R.string.delete_comment_fail),
-                                Snackbar.LENGTH_LONG).show();
+                            Snackbar.LENGTH_LONG).show();
                     break;
                 case REPOST_DELETE_SUCCESS:
                     mRepostDatas.remove(mDeletedPos);
@@ -916,12 +1005,12 @@ public class DetailActivity extends ActionBarActivity {
         mPinRepostNunView.setSelected(true);
     }
 
-    private void showRepostListView(){
+    private void showRepostListView() {
         mRepostListView.setVisibility(View.VISIBLE);
         mCommentListView.setVisibility(View.GONE);
     }
 
-    private void showCommentListView(){
+    private void showCommentListView() {
         mRepostListView.setVisibility(View.GONE);
         mCommentListView.setVisibility(View.VISIBLE);
     }
@@ -977,7 +1066,7 @@ public class DetailActivity extends ActionBarActivity {
             View view = LayoutInflater.from(this).inflate(R.layout.detail_comment_item, null, false);
             CommentViewHolder commentViewHolder = new CommentViewHolder(view);
             commentViewHolder.mUserNameView.setText(commentList.get(i).user.name);
-            commentViewHolder.mDataAndSourceView.setText(commentList.get(i).created_at.substring(0, 20) + Html.fromHtml(commentList.get(i).source));
+            commentViewHolder.mDataAndSourceView.setText(commentList.get(i).created_at.substring(0, 20) + Html.fromHtml(commentList.get(i).source == null ? "" : commentList.get(i).source));
             commentViewHolder.mContentView.setText(commentList.get(i).text);
             Linkify.addLinks(commentViewHolder.mContentView, Pattern.compile("http://[a-zA-Z0-9+&@#/%?=~_\\-|!:,\\.;]*[a-zA-Z0-9+&@#/%=~_|]"), "");//匹配所有网址链接
 
@@ -988,7 +1077,7 @@ public class DetailActivity extends ActionBarActivity {
             mBitmapUtils.display(commentViewHolder.mHeandView, commentList.get(i).user.avatar_large, mDisplayConfig);
             if (isAddToHead) {
                 mCommentListView.addView(commentViewHolder.getCommentView(), 0);
-            } else{
+            } else {
                 mCommentListView.addView(commentViewHolder.getCommentView());
             }
         }
@@ -1005,9 +1094,9 @@ public class DetailActivity extends ActionBarActivity {
             commentViewHolder.mRootView.setTag(sta);
             commentViewHolder.mRootView.setOnClickListener(mRepostItemViewClickListener);
             mBitmapUtils.display(commentViewHolder.mHeandView, sta.user.avatar_large, mDisplayConfig);
-            if (isAddToHead){
+            if (isAddToHead) {
                 mRepostListView.addView(commentViewHolder.getCommentView(), 0);
-            }else {
+            } else {
                 mRepostListView.addView(commentViewHolder.getCommentView());
             }
         }
@@ -1073,12 +1162,12 @@ public class DetailActivity extends ActionBarActivity {
                     case Constant.DETAIL_FRIENDS_TIMELINE_TYPE_MAIN:
                         mFriendsTimeline = MainActivity.getExtraFriendsTimeline();
                         break;
-                    case  Constant.DETAIL_FRIENDS_TIMELINE_TYPE_SEARCH:
+                    case Constant.DETAIL_FRIENDS_TIMELINE_TYPE_SEARCH:
                         mFriendsTimeline = SearchActivity.getExtraFriendsTimeline();
-                    case  Constant.DETAIL_FRIENDS_TIMELINE_TYPE_DETAIL:
+                    case Constant.DETAIL_FRIENDS_TIMELINE_TYPE_DETAIL:
                         mFriendsTimeline = DetailActivity.getRepostExtraFriendsTimeline();
                         break;
-                    case  Constant.DETAIL_FRIENDS_TIMELINE_TYPE_DETAIL_REPOST:
+                    case Constant.DETAIL_FRIENDS_TIMELINE_TYPE_DETAIL_REPOST:
                         mFriendsTimeline = MaterialDesignWBApps.EXTRA_STATUS;
                         break;
                     default:
@@ -1092,11 +1181,11 @@ public class DetailActivity extends ActionBarActivity {
         }
     }
 
-    public static FriendsTimelineResult.FriendsTimeline getExtraFriendsTimeline(){
+    public static FriendsTimelineResult.FriendsTimeline getExtraFriendsTimeline() {
         return mFriendsTimeline;
     }
 
-    public static FriendsTimelineResult.FriendsTimeline getRepostExtraFriendsTimeline(){
+    public static FriendsTimelineResult.FriendsTimeline getRepostExtraFriendsTimeline() {
         return mRepostFriendsTimeline;
     }
 

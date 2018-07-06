@@ -1,14 +1,14 @@
 package truecolor.mdwb.apps;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,20 +52,20 @@ import truecolor.mdwb.view.CircleImageView;
 import truecolor.webdataloader.WebListener;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
 
-//    @ViewInject(R.id.drawer_view)
+    //    @ViewInject(R.id.drawer_view)
     private DrawerLayout mDrawerLayout;
     private FrameLayout mContentLayout;
-//    @ViewInject(R.id.tab_view)
+    //    @ViewInject(R.id.tab_view)
     private TabLayout mTabLayout;
-//    @ViewInject(R.id.viewpager)
+    //    @ViewInject(R.id.viewpager)
     private ViewPager mViewPager;
     private CircleImageView mHeadView;
     private TextView mUserNameView;
     private TextView mDescription;
-//    public static FloatingActionButton sWhiteFab;
+    //    public static FloatingActionButton sWhiteFab;
 //    public static AppBarLayout sAppBarlayout;
     private FavoritesFragment mFavoritesFragment;
     private MainFragment mMainFragment;
@@ -121,17 +121,17 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == android.R.id.home){
+        } else if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
             return true;
-        }else if(id == R.id.ab_search_user){
+        } else if (id == R.id.ab_search_user) {
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this , SearchActivity.class);
+            intent.setClass(MainActivity.this, SearchActivity.class);
             intent.setType(Constant.GO_TO_SEARCH_USER);
             startActivity(intent);
-        }else if (id == R.id.ab_search_statuses){
+        } else if (id == R.id.ab_search_statuses) {
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this , SearchActivity.class);
+            intent.setClass(MainActivity.this, SearchActivity.class);
             intent.setType(Constant.GO_TO_SEARCH_STATUSES);
             startActivity(intent);
         }
@@ -139,12 +139,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initView(){
-        mContentLayout = (FrameLayout) findViewById(R.id.main_content);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_view);
-        mHeadView = (CircleImageView) findViewById(R.id.user_head_view);
-        mUserNameView = (TextView) findViewById(R.id.user_name_view);
-        mDescription = (TextView) findViewById(R.id.user_description);
+    private void initView() {
+        mContentLayout = findViewById(R.id.main_content);
+        mDrawerLayout = findViewById(R.id.drawer_view);
+//        mHeadView = findViewById(R.id.user_head_view);
+
+        NavigationView navigationView = findViewById(R.id.nv_sample_drawer_navigation);
+        View headView = navigationView.inflateHeaderView(R.layout.main_drawer_header);
+        mUserNameView = headView.findViewById(R.id.user_name_view);
+        mHeadView = headView.findViewById(R.id.user_head_view);
+        mDescription = headView.findViewById(R.id.user_description);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -162,9 +166,9 @@ public class MainActivity extends ActionBarActivity {
     private RequestListener mRequestListener = new RequestListener() {
         @Override
         public void onComplete(String s) {
-            if (s != ""){
+            if (s != "") {
                 UserInfoResult userInfoResult = JSON.parseObject(s, UserInfoResult.class);
-                if (userInfoResult != null){
+                if (userInfoResult != null) {
                     mUserNameView.setText(userInfoResult.name);
                     mDescription.setText(userInfoResult.description);
                     ImageLoader.loadImage(userInfoResult.avatar_large, HttpImageDecoder.getInstance(), ImageViewDisplayer.getInstance(),
@@ -191,15 +195,15 @@ public class MainActivity extends ActionBarActivity {
 //                db.deleteAll(EmotionsResult.class);
                 List<EmotionsResult> lists = JSON.parseArray(s, EmotionsResult.class);
                 List<EmotionsResult> emotionsResultList = mDbUtils.findAll(Selector.from(EmotionsResult.class));
-                if (emotionsResultList == null || emotionsResultList.size() == 0){
+                if (emotionsResultList == null || emotionsResultList.size() == 0) {
                     List<EmotionsResult> list = JSON.parseArray(s, EmotionsResult.class);
                     Log.e("", list.size() + "");
                     for (int i = 0; i <= 112; i++) {
                         EmotionsResult er = list.get(i);
-                        String[] strarray=er.getUrl().split("/");
+                        String[] strarray = er.getUrl().split("/");
                         String img_name = strarray[strarray.length - 1];
                         er.url = img_name;
-                        if (er.url.equals("88_org.gif")){
+                        if (er.url.equals("88_org.gif")) {
                             er.url = "baibai_org.gif";
                         }
                         mDbUtils.save(er);
@@ -234,7 +238,7 @@ public class MainActivity extends ActionBarActivity {
 //                        System.out.println("请求失败");
 //                    }
 //                }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -255,8 +259,8 @@ public class MainActivity extends ActionBarActivity {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         byte[] buffer = new byte[2048];
         int len = 0;
-        while((len = is.read(buffer)) != -1){
-            os.write(buffer,0,len);
+        while ((len = is.read(buffer)) != -1) {
+            os.write(buffer, 0, len);
         }
         is.close();
         return os.toByteArray();
@@ -265,10 +269,10 @@ public class MainActivity extends ActionBarActivity {
     private WebListener mWebListener = new WebListener() {
         @Override
         public void onDataLoadFinished(int service, Bundle params, Object result) {
-            if (service == WebServiceConfigure.GET_USER){
-                if (result != null){
+            if (service == WebServiceConfigure.GET_USER) {
+                if (result != null) {
                     UserInfoResult userInfoResult = (UserInfoResult) result;
-                    if (userInfoResult != null){
+                    if (userInfoResult != null) {
                         bingUserInfoData(userInfoResult);
                     }
                 }
@@ -280,7 +284,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public boolean onNavigationItemSelected(MenuItem menuItem) {
             int id = menuItem.getItemId();
-            switch (id){
+            switch (id) {
                 case R.id.nav_home:
                     replaceMainFragment();
                     break;
@@ -300,7 +304,7 @@ public class MainActivity extends ActionBarActivity {
     public View.OnClickListener mGoodViewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            LinearLayout goodView = (LinearLayout)v;
+            LinearLayout goodView = (LinearLayout) v;
             TextView goodNumView = (TextView) goodView.getChildAt(1);
             goodNumView.setText(String.valueOf(Integer.parseInt(goodNumView.getText().toString()) + 1));
             Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.good_statue_scale_anim);
@@ -334,7 +338,7 @@ public class MainActivity extends ActionBarActivity {
     public View.OnClickListener mCardViewClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            FriendsTimelineResult.FriendsTimeline ft = (FriendsTimelineResult.FriendsTimeline)v.getTag();
+            FriendsTimelineResult.FriendsTimeline ft = (FriendsTimelineResult.FriendsTimeline) v.getTag();
             EXTRA_FRIENDS_TIMELINE = ft;
             Intent intent = new Intent();
             intent.putExtra(Constant.DETALI_FRIENDS_TIMELINE_TYPE, Constant.DETAIL_FRIENDS_TIMELINE_TYPE_MAIN);
@@ -359,14 +363,14 @@ public class MainActivity extends ActionBarActivity {
     /**
      * 绑定用户信息数据
      */
-    private void bingUserInfoData(UserInfoResult userInfoResult){
+    private void bingUserInfoData(UserInfoResult userInfoResult) {
         mUserNameView.setText(userInfoResult.name);
         mDescription.setText(userInfoResult.description);
         ImageLoader.loadImage(userInfoResult.avatar_large, HttpImageDecoder.getInstance(), ImageViewDisplayer.getInstance(),
                 mHeadView, R.mipmap.ic_user);
     }
 
-    private void replaceFavoritesFragment(){
+    private void replaceFavoritesFragment() {
         android.support.v4.app.FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (mFavoritesFragment == null) {
             mFavoritesFragment = new FavoritesFragment(MainActivity.this);
@@ -378,19 +382,19 @@ public class MainActivity extends ActionBarActivity {
         transaction.commit();
     }
 
-    private void replaceMainFragment(){
+    private void replaceMainFragment() {
         android.support.v4.app.FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        if (mMainFragment == null) {
 //            mMainFragment = new MainFragment(MainActivity.this);
 //            transaction.add(R.id.main_content, mMainFragment);
 //        }
         if (mFavoritesFragment != null) transaction.hide(mFavoritesFragment);
-         if (mInfoFragment != null) transaction.hide(mInfoFragment);
+        if (mInfoFragment != null) transaction.hide(mInfoFragment);
         transaction.show(mMainFragment);
         transaction.commit();
     }
 
-    private void replaceInfoFragment(){
+    private void replaceInfoFragment() {
         android.support.v4.app.FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (mInfoFragment == null) {
             mInfoFragment = new InfoFragment();
@@ -406,17 +410,17 @@ public class MainActivity extends ActionBarActivity {
         return EXTRA_FRIENDS_TIMELINE;
     }
 
-    private void getEmotion(){
+    private void getEmotion() {
         try {
             mDbUtils = DbUtils.create(MainActivity.this);
             List<EmotionsResult> emotionsResultList = mDbUtils.findAll(Selector.from(EmotionsResult.class));
             if (emotionsResultList != null && emotionsResultList.size() != 0) {
                 MaterialDesignWBApps.EMOTIONS = emotionsResultList;
-            }else {
+            } else {
                 StatusesAPI statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
                 statusesAPI.emotions(WeiboAPI.EMOTION_TYPE.FACE, WeiboAPI.LANGUAGE.cnname, mEmotionsRequestListener);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

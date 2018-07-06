@@ -1,8 +1,8 @@
 package truecolor.mdwb.apps;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,13 +13,13 @@ import com.weibo.sdk.android.WeiboDialogError;
 import com.weibo.sdk.android.WeiboException;
 
 import truecolor.mdwb.R;
-import truecolor.mdwb.logics.SsoHandler;
 import truecolor.mdwb.global.WebServiceConfigure;
 import truecolor.mdwb.logics.AccessTokenKeeper;
+import truecolor.mdwb.logics.SsoHandler;
 import truecolor.mdwb.model.Oauth2AccessToken;
 import truecolor.mdwb.utils.Utils;
 
-public class Oauth2AccessTokenActivity extends ActionBarActivity {
+public class Oauth2AccessTokenActivity extends AppCompatActivity {
 
     private Button mLoginButton;
     SsoHandler mSsoHandler;
@@ -31,6 +31,8 @@ public class Oauth2AccessTokenActivity extends ActionBarActivity {
 
         mLoginButton = (Button) findViewById(R.id.login_btn);
         mLoginButton.setOnClickListener(mLoginButtonClickListener);
+
+        getIntent().getStringExtra("fkk");
 
         Oauth2AccessToken accessToken = AccessTokenKeeper.readAccessToken(this);
         if (!accessToken.getAccessToken().equals("")) {

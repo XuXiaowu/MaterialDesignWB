@@ -35,7 +35,6 @@
             android:id="@+id/edit_serach_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_button_height"
-            android:layout_below="@id/appbar"
             android:imeOptions="actionSearch"
             android:singleLine="true"
             android:hint="@string/sreach_name_hint"/>

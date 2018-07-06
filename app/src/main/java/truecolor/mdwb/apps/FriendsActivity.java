@@ -1,11 +1,11 @@
 package truecolor.mdwb.apps;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -38,7 +38,7 @@ import truecolor.mdwb.utils.Utils;
 /**
  * Created by xiaowu on 15/11/23.
  */
-public class FriendsActivity extends ActionBarActivity {
+public class FriendsActivity extends AppCompatActivity {
 
     private static final String FRIENDS_URL = "https://api.weibo.com/2/friendships/friends.json";
     private int mCursor;
@@ -223,7 +223,7 @@ public class FriendsActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        actionBar.setHomeAsUpIndicator(R.drawable.back_white);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.title_friends);
 

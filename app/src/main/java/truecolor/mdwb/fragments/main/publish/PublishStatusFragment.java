@@ -2,8 +2,6 @@ package truecolor.mdwb.fragments.main.publish;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -26,7 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
@@ -184,13 +182,14 @@ public class PublishStatusFragment extends APulishStatusFragment{
             final String[] cities = {
                     getResources().getString(R.string.publish_pictures),
                     getResources().getString(R.string.publish_camera)};
-            new AlertDialogWrapper.Builder(getActivity())
-                    .setTitle(R.string.publish_select_photo_sources)
-                    .setItems(cities, new DialogInterface.OnClickListener() {
 
+            new MaterialDialog.Builder(getActivity())
+                    .title(R.string.publish_select_photo_sources)
+                    .items(cities)
+                    .itemsCallback(new MaterialDialog.ListCallback() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            switch (which) {
+                        public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
+                            switch (position) {
                                 case 0:
                                     Intent intent = new Intent();
                                     intent.setType("image/*");
@@ -205,6 +204,28 @@ public class PublishStatusFragment extends APulishStatusFragment{
                             }
                         }
                     }).show();
+
+//            new AlertDialogWrapper.Builder(getActivity())
+//                    .setTitle(R.string.publish_select_photo_sources)
+//                    .setItems(cities, new DialogInterface.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            switch (which) {
+//                                case 0:
+//                                    Intent intent = new Intent();
+//                                    intent.setType("image/*");
+//                                    intent.setAction(Intent.ACTION_GET_CONTENT);
+//                                    startActivityForResult(intent, REQUEST_CODE_CAPTURE_IMAGES);
+//                                    break;
+//
+//                                case 1:
+//                                    Intent getImageByCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+//                                    startActivityForResult(getImageByCamera, REQUEST_CODE_CAPTURE_CAMEIA);
+//                                    break;
+//                            }
+//                        }
+//                    }).show();
         }
     };
 

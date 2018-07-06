@@ -1,6 +1,7 @@
 package truecolor.mdwb.fragments.main.status;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,7 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.weibo.sdk.android.WeiboException;
 import com.weibo.sdk.android.net.RequestListener;
 
@@ -226,14 +227,14 @@ public class FavoritesFragment extends Fragment {
         mRemovedStatusesPos = v.getId();
         String items[] = getResources().getStringArray(R.array.favorites_more_menus);
 
-
-        new AlertDialogWrapper.Builder(getActivity())
-                .setItems(items, new DialogInterface.OnClickListener() {
-
+        new MaterialDialog.Builder(getActivity())
+                .title(R.string.publish_select_photo_sources)
+                .items(R.array.favorites_more_menus)
+                .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onSelection(MaterialDialog dialog, View itemView, int position, CharSequence text) {
                         StatusesAPI statusesAPI;
-                        switch (which){
+                        switch (position){
                             case 0:
                                 statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
                                 statusesAPI.favoritesDestroy(ftl.idstr, mFavoritesDestroyRequestListener);
@@ -245,8 +246,28 @@ public class FavoritesFragment extends Fragment {
                                 break;
                         }
                     }
-                })
-                .show();
+                }).show();
+
+//        new AlertDialogWrapper.Builder(getActivity())
+//                .setItems(items, new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        StatusesAPI statusesAPI;
+//                        switch (which){
+//                            case 0:
+//                                statusesAPI = new StatusesAPI(Utils.getWeiboAccessToken());
+//                                statusesAPI.favoritesDestroy(ftl.idstr, mFavoritesDestroyRequestListener);
+//                                break;
+//                            case 1:
+//                                Utils.copy(ftl.text, getActivity());
+//                                Snackbar.make(mView, getResources().getString(R.string.delete_comment_copy),
+//                                        Snackbar.LENGTH_LONG).show();
+//                                break;
+//                        }
+//                    }
+//                })
+//                .show();
     }
 
 

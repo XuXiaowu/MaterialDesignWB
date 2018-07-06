@@ -28,7 +28,7 @@ public class WebServiceConfigure {
     public static final String HTTP_PARAM_PAUTH_TOKEN_SECRET = "oauth_token_secret";
 
 
-    public static final String CONSUMER_KEY = "2499062472";
+    public static final String CONSUMER_KEY = "3236949863";
     public static final String AISEN_KEY = "2362431378";
     public static final String SINA_CONSUMER_KEY = "966056985";
 
@@ -37,7 +37,7 @@ public class WebServiceConfigure {
 
 
     /************************************* sina weibo **********************************************/
-    public static final String REDIRECT_URL = "http://www.sina.com";
+    public static final String REDIRECT_URL = "http://com.mirahome.mlily";
     public static final String BASE_URL = "https://api.weibo.com/2/";
     public static final String HTTP_METHOD_GET = "GET";
     public static final int  HTTP_PARAM_DEFAULT_COUNT = 20;

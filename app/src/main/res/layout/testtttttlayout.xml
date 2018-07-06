@@ -10,6 +10,6 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="300dp"
-        android:background="@color/hint_foreground_material_light"/>
+       />
 
 </FrameLayout>

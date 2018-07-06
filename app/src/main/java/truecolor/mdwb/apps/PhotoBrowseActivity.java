@@ -1,24 +1,18 @@
 package truecolor.mdwb.apps;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -34,15 +28,9 @@ import com.lidroid.xutils.bitmap.BitmapDisplayConfig;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadCallBack;
 import com.lidroid.xutils.bitmap.callback.BitmapLoadFrom;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 
-import truecolor.imageloader.HttpImageDecoder;
-import truecolor.imageloader.ImageLoader;
-import truecolor.imageloader.ImageViewDisplayer;
 import truecolor.mdwb.R;
-import truecolor.mdwb.fragments.main.status.PageSectionFragment;
 import truecolor.mdwb.global.Constant;
 import truecolor.mdwb.model.FriendsTimelineResult;
 import truecolor.mdwb.utils.FileUtils;
@@ -50,7 +38,7 @@ import truecolor.mdwb.utils.Utils;
 import truecolor.mdwb.view.ImageGroupView;
 import uk.co.senab.photoview.PhotoView;
 
-public class PhotoBrowseActivity extends ActionBarActivity {
+public class PhotoBrowseActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
 

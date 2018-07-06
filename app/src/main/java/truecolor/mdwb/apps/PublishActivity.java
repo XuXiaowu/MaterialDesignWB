@@ -1,15 +1,14 @@
 package truecolor.mdwb.apps;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 
 import truecolor.mdwb.R;
 import truecolor.mdwb.fragments.main.publish.PublishStatusCommentFragment;
@@ -17,7 +16,7 @@ import truecolor.mdwb.fragments.main.publish.PublishStatusFragment;
 import truecolor.mdwb.fragments.main.publish.PublishStatusRepostFragment;
 import truecolor.mdwb.global.Constant;
 
-public class PublishActivity extends ActionBarActivity {
+public class PublishActivity extends AppCompatActivity {
 
     private Toolbar mToobar;
     private View mActionBarView;
@@ -32,7 +31,7 @@ public class PublishActivity extends ActionBarActivity {
         setSupportActionBar(mToobar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        actionBar.setHomeAsUpIndicator(R.drawable.back_white);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         initActionBarView();
